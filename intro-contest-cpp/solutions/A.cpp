@@ -3,31 +3,24 @@
 
 int main() {
     int number;
-    int previousNumber;
-	int depth = 0;
-    int currentPower = 2;
+    int depth = 0;
 
     std::cin >> number;
-    
-    previousNumber = number;
-    number /= 2;
-    ++number;
 
-    while (number >= currentPower) {
-        currentPower <<= 1;
+    while (number / 2 + 1 >= 1 << depth) {
         ++depth;
     }
 
-    int remainder = previousNumber - 2 * ((1 << depth) - 1);
+    int remainder = number - (1 << depth) + 2;
     int quantityToBuy = 0;
     
     if (remainder == 0) {
         quantityToBuy = 0;
     } else {
-        quantityToBuy = (1 << (depth + 1)) - remainder;
+        quantityToBuy = (1 << depth) - remainder;
     }
 
-    std::cout << depth << " " << quantityToBuy << std::endl;
+    std::cout << depth - 1 << " " << quantityToBuy << std::endl;
     return 0;
 }
 

@@ -15,10 +15,10 @@ int main() {
         std::cin >> grid[i];
     }
 
-    std::vector<std::pair<int, int>> patternCells = {
-        {0, 0}, {1, 0}, {2, 0}, {1, 1}, {0, 2}, {1, 2}, {2, 2}
+    std::vector<std::pair<int, int>> patternCells = { // Клетки вертолётной площадки вида Н
+        {0, 0}, {1, 0}, {2, 0}, {1, 1}, {0, 2}, {1, 2}, {2, 2} // Клетке (0, 0) соответствует левый верхний символ площадки вида Н 
     };
-    std::vector<std::pair<int, int>> emptyCells = {
+    std::vector<std::pair<int, int>> emptyCells = { // Пустые клетки вокруг вертолётной площадки
         {-1, -1}, {-1, 0}, {-1, 1}, {-1, 2}, {-1, 3},
         {0, -1}, {0, 1}, {0, 3},
         {1, -1}, {1, 3},
@@ -43,9 +43,9 @@ int main() {
         for (int j = 0; j < cols; ++j) {
             bool stop = false;
             
-            if (grid[i][j] == '#') {
+            if (grid[i][j] == '#') { // Потенциальная "нулевая" клетка (0, 0) в площадке вида Н
                 for (auto [pi, pj] : patternCells) {
-                    if (!isValid(i + pi, j + pj) || grid[i + pi][j + pj] != '#') {
+                    if (!isValid(i + pi, j + pj) || grid[i + pi][j + pj] != '#') { // Если клетки площадки вокруг "нулевой" не соответствуют паттерну, то ищем новую "нулевую"
                         stop = true;
                         break;
                     }
@@ -56,11 +56,11 @@ int main() {
                 }
 
                 for (auto [ei, ej] : emptyCells) {
-                    if (!isValid(i + ei, j + ej)) {
+                    if (!isValid(i + ei, j + ej)) { // Если пустая клетка вокруг площадки отсутствует, то она нам подходит
                         continue;
                     }
 
-                    if (grid[i + ei][j + ej] != '.') {
+                    if (grid[i + ei][j + ej] != '.') { // Если клетка не является пустой вокруг площадки, то ищем новую "нулевую"
                         stop = true;
                         break;
                     }

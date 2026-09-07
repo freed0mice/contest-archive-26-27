@@ -1,18 +1,23 @@
 // Yandex Code Style
 #include <iostream>
 #include <vector>
+#include <cstdint>
 
-const unsigned long long MOD = 1000000007;
+const uint64_t MOD = 1000000007;
 
 int main() {
     size_t number = 0;
     size_t k = 0;
-    std::vector<unsigned long long> sequence;
     
     std::cin >> number >> k;
+
+    if (number < k) {
+        std::cout << 1 << std::endl;
+        return 0;
+    }
     
-    sequence.resize(number + 1);
-    
+    std::vector<uint64_t> sequence(number + 1, 0);
+
     for (size_t i = 0; i < k; ++i) {
         sequence[i] = 1;
     }
